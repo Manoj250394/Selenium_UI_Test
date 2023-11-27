@@ -1,0 +1,31 @@
+name: CI Integration Pipeline
+
+on:
+  push:
+    branches:
+      - trial
+      
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+        
+    - name: Build with Maven
+      run: mvn clean install
+      
+    - name: Run Selenium Test on Sauce Labs
+      run: mvn verify -Psaucelabs
+      env:
+        SAUCE_USERNAME: oauth-manoj.gs2534-477f8
+        SAUCE_ACCESS_KEY: dad2ca02-ec68-4045-99c5-902dae9c93bd      
+             
