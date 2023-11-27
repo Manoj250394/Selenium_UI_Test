@@ -3,7 +3,7 @@ name: CI Integration Pipeline
 on:
   push:
     branches:
-      - trial
+      - main
       
       
 jobs:
